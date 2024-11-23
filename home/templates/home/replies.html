@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replies Section</title>
+    <style>
+        /* General container styling */
+        .topics-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+            background-color: #f1fdf1;  /* Light green background */
+        }
+
+        /* Reply card styling */
+        .reply-card {
+            background-color: #004d00; /* Deep green */
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-bottom: 15px;
+            color: #e8f8e8; /* Light text */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        /* Hover effect for reply cards */
+        .reply-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Reply header styling */
+        .reply-header {
+            border-bottom: 2px solid #009900; /* Lighter green */
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Meta info text styling */
+        .meta-info {
+            font-size: 16px;
+            color: #a9d08e; /* Lighter green text */
+        }
+
+        /* Meta info hover effect */
+        .meta-info span {
+            font-weight: bold;
+            color: #d4e157; /* Bright green */
+        }
+
+        /* Reply content styling */
+        .reply-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            max-height: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: max-height 0.4s ease-in;
+        }
+
+        /* Expanded reply content styling */
+        .reply-content.expanded p {
+            max-height: 500px;
+            overflow: visible;
+            transition: max-height 0.4s ease-out;
+        }
+
+        /* Footer Styles */
+        .topic-footer {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .toggle-comments-btn {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-comments-btn:hover {
+            background-color: #388e3c;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .topics-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .reply-card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="topics-container">
+    {% for reply in replies %}
+        <div class="reply-card">
+            <div class="reply-header">
+              <h1>replies to {{ reply.author }}</h1>
+                <p class="meta-info">Posted by: <span>{{ reply.author }}</span> | {{ reply.created_at }}</p>
+            </div>
+            <div class="reply-content">
+                <p>{{ reply.content }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Footer for toggling replies -->
+<div class="topic-footer">
+    <button class="toggle-comments-btn">Show/Hide Replies</button>
+</div>
+
+<script>
+    // Smooth scroll and hover zoom effect
+    document.querySelectorAll('.reply-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = "transform 0.3s ease-in-out";
+            card.style.transform = "scale(1.05)";
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = "scale(1)";
+        });
+    });
+
+    // Expand or collapse reply content on click
+    document.querySelectorAll('.reply-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const content = card.querySelector('.reply-content');
+            content.classList.toggle('expanded');
+        });
+    });
+
+    // Toggle the visibility of the replies section
+    const toggleButton = document.querySelector('.toggle-comments-btn');
+    const repliesContainer = document.querySelector('.topics-container');
+
+    toggleButton.addEventListener('click', () => {
+        // Toggle the visibility of the replies
+        if (repliesContainer.style.display === 'none') {
+            repliesContainer.style.display = 'flex';
+            toggleButton.textContent = 'Hide Replies';
+        } else {
+            repliesContainer.style.display = 'none';
+            toggleButton.textContent = 'Show Replies';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Container Styles */
+.topics-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Topic Card Styles */
+.topic-card {
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Styles */
+.topic-header h1 {
+    color: #2e7d32;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.meta-info {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.meta-info span {
+    font-weight: bold;
+}
+
+/* Content Styles */
+.topic-content {
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Footer Styles */
+.topic-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.toggle-comments-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-comments-btn:hover {
+    background-color: #388e3c;
+}
+
+/* Comments Section */
+.comments-section {
+    margin-top: 10px;
+    padding: 10px;
+    background: #c8e6c9;
+    border: 1px solid #81c784;
+    border-radius: 5px;
+    display: none; /* Hidden by default */
+}
+
+.comments-section.hidden {
+    display: none;
+}
+
+.comment-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #1b5e20;
+    font-weight: bold;
+}
+
+.comment-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .topic-card {
+        width: 100%;
+    }
+}
